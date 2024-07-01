@@ -1,0 +1,51 @@
+body {
+    background-color: #333;
+}
+
+header {
+    background-color: #444;
+    padding: 20px;
+    font-family: 'Consolas';
+    border-radius: 10px;
+    display: flex;
+    height: fit-content;
+    align-items: center;
+}
+
+main {
+    background-color: #444;
+    padding: 50px;
+    font-family: 'Consolas';
+    border-radius: 10px;
+    height: fit-content;
+    align-items: center;
+    color: white;
+}
+
+.navitems {
+    transition: 1s;
+    padding-right: 10px;
+    padding-left: 10px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    width: fit-content;
+    height: fit-content;
+    font-size: 2vb;
+}
+
+.navitems:hover {
+    transition: 1s;
+    padding-right: 50px;
+    padding-left: 50px;
+    color: #444;
+    background-color: white;
+    border-radius: 50px;
+}
+
+.logotext {
+    transition: 1s;
+    color: white;
+    padding-right: 50px;
+    font-size: 5vb;
+}
