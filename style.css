@@ -16,6 +16,7 @@ header {
     background-color: #444;
     padding: 50px;
     font-family: 'Consolas';
+    font-size: 1vw;
     border-radius: 10px;
     height: fit-content;
     text-align: center;
@@ -29,7 +30,7 @@ header {
     font-family: "Consolas";
     border: none;
     width: 100%;
-    font-size: 2.5vb;
+    font-size: 1.5vw;
 }
 
 .main1 {
@@ -40,14 +41,14 @@ header {
     height: fit-content;
     text-align: center;
     color: white;
-    font-size: 2.5vb;
+    font-size: 1.2vw;
 }
 
 .logintext {
     transition: .5s;
     text-decoration: none;
     color: #333;
-    font-size: 2.5vb;
+    font-size: 1vw;
 }
 
 .logintext:hover {
@@ -63,7 +64,7 @@ header {
     text-align: center;
     width: fit-content;
     height: fit-content;
-    font-size: 2vb;
+    font-size: 1vw;
     transition: .5s;
 }
 
@@ -78,7 +79,7 @@ header {
 .logotext {
     color: white;
     padding-right: 50px;
-    font-size: 5vb;
+    font-size: 3vw;
     transition: .5s;
 }
 
@@ -91,7 +92,7 @@ header {
     cursor: pointer;
     padding-left: 20px;
     padding-right: 20px;
-    font-size: 1.6vb;
+    font-size: 1vw;
 }
 
 .button1:hover {
