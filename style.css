@@ -99,3 +99,20 @@ header {
     background-color: white;
     color: #04AA6D; 
 }
+
+.button2 {
+    transition: .5s;
+    background-color: #757575;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding-left: 50px;
+    padding-right: 50px;
+    font-size: 1vw;
+}
+
+.button2:hover {
+    background-color: white;
+    color: #757575; 
+}
