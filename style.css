@@ -12,13 +12,34 @@ header {
     align-items: center;
 }
 
-main {
+.main0 {
     background-color: #444;
     padding: 50px;
     font-family: 'Consolas';
     border-radius: 10px;
     height: fit-content;
     align-items: center;
+    color: white;
+}
+
+.main1 {
+    background-color: #444;
+    padding: 50px;
+    font-family: 'Consolas';
+    border-radius: 10px;
+    height: fit-content;
+    text-align: center;
+    color: white;
+}
+
+.logintext {
+    transition: .5s;
+    text-decoration: none;
+    color: #333;
+}
+
+.logintext:hover {
+    text-decoration: none;
     color: white;
 }
 
@@ -31,7 +52,7 @@ main {
     width: fit-content;
     height: fit-content;
     font-size: 2vb;
-    transition: 1s;
+    transition: .5s;
 }
 
 .navitems:hover {
@@ -46,12 +67,12 @@ main {
     color: white;
     padding-right: 50px;
     font-size: 5vb;
-    transition: 1s;
+    transition: .5s;
 }
 
 .button1 {
-    transition: 1s;
-    background-color: #555;
+    transition: .5s;
+    background-color: #04AA6D;
     color: white;
     border: none;
     border-radius: 10px;
@@ -62,7 +83,5 @@ main {
 
 .button1:hover {
     background-color: white;
-    color: #3e3e3e;
-    padding-right: 50px;
-    padding-left: 50px;    
+    color: #04AA6D; 
 }
