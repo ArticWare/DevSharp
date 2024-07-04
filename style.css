@@ -116,3 +116,20 @@ header {
     background-color: white;
     color: #757575; 
 }
+
+.button3 {
+    transition: .5s;
+    background-color: #04AA6D;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding-left: 100px;
+    padding-right: 100px;
+    font-size: 1vw;
+}
+
+.button3:hover {
+    background-color: white;
+    color: #04AA6D; 
+}
