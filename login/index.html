@@ -7,6 +7,7 @@
     <title>DevSharp</title>
 </head>
 <body>
+    <script type="module" src="login.js"></script>
     <header>
         <h1 class="logotext">devsharp</h1>
         <a href="../home" class="navitems"><h1>Home</h1></a>
@@ -17,18 +18,19 @@
         <h1>Login</h1>
         <div style="display: flex; width: fit-content; margin: auto;">
             <div style="width: fit-content; text-align: right;">
-                <h2>Username</h2>
+                <h2>Email</h2>
                 <h2>Password</h2>
             </div>
             <h1 style="padding: 10px;"></h1>
             <div style="width: fit-content; text-align: left;">
-                <h2><input type="text" class="text1" placeholder="Username" id="username"></h2>
+                <h2><input type="email" class="text1" placeholder="Email" id="email"></h2>
                 <h2><input type="password" class="text1" placeholder="Password" id="pwd"></h2>
                 <a href="../password-recovery" class="logintext"><h3>Forgot your password?</h3></a>
             </div>
         </div>
+        <p style="color: red;" id="wrongpwd"></p>
         <p></p>
-        <a href="../signup"><button class="button3"><h2>Log in</h2></button></a>
+        <button class="button3" id="loginbutt"><h2>Log in</h2></button>
         <p>Or</p>
         <a href="../signup" class="logintext"><h2>Don't have an account?</h2></a>
     </main>
