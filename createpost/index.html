@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <title>DevSharp</title>
+</head>
+<body>
+    <script type="module" src="ifsignedin.js"></script>
+    <script type="module" src="addpost.js"></script>
+    <header>
+        <h1 class="logotext">devsharp</h1>
+        <a href="../home" class="navitems"><h1>Home</h1></a>
+        <a href="../about" class="navitems"><h1>About</h1></a>
+    </header>
+    <p></p>
+    <main class="main0">
+
+        <div style="display: flex; width: fit-content; margin: auto;">
+            <div style="width: fit-content; text-align: right;">
+                <h2>Title</h2>
+                <h2>Description</h2>
+            </div>
+            <h1 style="padding: 10px;"></h1>
+            <div style="width: fit-content; text-align: left;">
+                <h2><input type="text" class="text1" id="title" style="width: 50vw;"></h2>
+                <h2><textarea type="text" class="text1" id="desc" style="height: 50vh; width: 50vw;"></textarea>
+            </div>
+        </div>
+        <button class="button1" id="submit"><h2>Create post</h2></button>
+        <p style="color: red;" id="wrongpwd"></p>
+    </main>
+</body>
+</html>

@@ -143,6 +143,8 @@ header {
     padding-bottom: 5%;
     text-align: left;
     cursor: pointer;
+    word-wrap: break-word;
+
 }
 
 .titleposttext {
@@ -151,6 +153,7 @@ header {
 
 .posttext {
     padding-left: 5%;
+    padding-right: 2%;
     color: #5b5a5a;
 }
 
@@ -159,4 +162,6 @@ header {
     height: fit-content;
     text-align: left;
     padding: 10px;
+    width: 95%;
+    word-wrap: break-word;
 }
