@@ -22,8 +22,8 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 onAuthStateChanged(auth,function(user) {
-if (user) {
+  if (user) {
     var email = user.email;
-    window.location.replace(signedin)
+    window.location.href=signedin;
 }
 });

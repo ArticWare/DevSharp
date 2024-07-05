@@ -1,5 +1,5 @@
-const notsignedin = '/getstarted';
-const signedin = '/home';
+const notsignedin = 'getstarted';
+const signedin = 'home';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
@@ -25,8 +25,8 @@ const auth = getAuth(app);
 onAuthStateChanged(auth,function(user) {
 if (user) {
     var email = user.email;
-    window.location.replace(signedin)
+    window.location.href=signedin;
 } else {
-    window.location.replace(notsignedin)
+    window.location.href=notsignedin;
 }
 });

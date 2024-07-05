@@ -23,6 +23,6 @@ const analytics = getAnalytics(app);
 const auth = getAuth(app);
 onAuthStateChanged(auth,function(user) {
 if (!user) {
-    window.location.replace(notsignedin)
+    window.location.href=notsignedin;
 }
 });
