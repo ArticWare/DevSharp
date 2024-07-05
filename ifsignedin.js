@@ -1,4 +1,4 @@
-const notsignedin = 'getstarted';
+const notsignedin = '/getstarted';
 const signedin = 'home';
 
 // Import the functions you need from the SDKs you need
