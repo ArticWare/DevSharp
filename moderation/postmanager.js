@@ -18,11 +18,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-async function acceptPost(title,desc,author){
+async function acceptPost(title,desc,writer,author){
   const data={
     title: title,
     desc: desc,
     author: author,
+    writer: writer,
     hidden: false
   };
   await setDoc(doc(db, "posts", title), data);
@@ -34,7 +35,7 @@ async function deletePost(title){
   location.reload()
 }
 
-function addPost(title, desc, author){
+function addPost(title, desc, writer, author){
   if (title.length<=150 && desc.length<=750){
       var posts = document.getElementById("posts");
 
@@ -53,6 +54,10 @@ function addPost(title, desc, author){
       desctext.className="posttext";
       desctext.innerHTML=desc;
       post.appendChild(desctext);
+      var authort=document.createElement("h4");
+      authort.className="posttext"
+      authort.innerHTML="Author : "+writer;
+      post.appendChild(authort);
 
       var div=document.createElement("div");
       div.style.textAlign="center";
@@ -63,7 +68,7 @@ function addPost(title, desc, author){
       var accepttext=document.createElement("h2");
       accepttext.innerHTML="Accept post";
       accept.appendChild(accepttext);
-      accept.onclick=function(){acceptPost(title,desc,author)};
+      accept.onclick=function(){acceptPost(title,desc,writer,author)};
       div.appendChild(accept);
 
       var reject=document.createElement("button");
@@ -88,6 +93,6 @@ const querySnapshot = await getDocs(collection(db,"posts"));
 querySnapshot.forEach((doc) => {
     var data = doc.data();
     if (data.hidden){
-      addPost(data.title,data.desc,data.author);
+      addPost(data.title,data.desc,data.writer,data.author);
     }
 });

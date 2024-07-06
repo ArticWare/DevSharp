@@ -30,7 +30,7 @@ async function deletePost(title){
   await deleteDoc(doc(db, "posts", title));
   location.reload()
 }
-function addPost(title, desc, author){
+function addPost(title, desc, writer,author){
   if (title.length<=150 && desc.length<=750){
       var posts = document.getElementById("posts");
 
@@ -49,7 +49,11 @@ function addPost(title, desc, author){
       desctext.className="posttext";
       desctext.innerHTML=desc;
       post.appendChild(desctext);
-      
+      var authort=document.createElement("h4");
+      authort.className="posttext"
+      authort.innerHTML="Author : "+writer;
+      post.appendChild(authort);
+
       posts.appendChild(document.createElement("p"));
       posts.appendChild(post);
       var delpost=document.createElement("button");
@@ -68,6 +72,6 @@ const thing = await getDocs(collection(db,"posts"));
 thing.forEach((doc) => {
     var data = doc.data();
     if (!data.hidden){
-      addPost(data.title,data.desc,data.author)
+      addPost(data.title,data.desc,data.writer,data.author)
     }
 });

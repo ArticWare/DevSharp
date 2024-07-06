@@ -29,6 +29,7 @@ async function addpost(){
     document.getElementById("wrongpwd").innerHTML="";
     var etitle = document.getElementById("title");
     var edesc = document.getElementById("desc");
+    var writer = document.getElementById("writer");
     var duplicates=false;
     const querySnapshot = await getDocs(collection(db,"posts"));
     querySnapshot.forEach((doc) => {
@@ -36,32 +37,37 @@ async function addpost(){
           duplicates=true;
         }
     });
-    if (etitle.value.length<150 && edesc.value.length<750){
-      if (!duplicates){
-        const docData = {
-            title: String(etitle.value),
-            desc: String(edesc.value),
-            author: uid,
-            hidden: true
-        };
-        try {
-            await setDoc(doc(db, "posts", String(title.value)), docData);
-            alert("Your post is on pending and a moderator will check it soon!");
-            window.location.href="../home";
-          } catch (error) {
-            if (error.code === "permission-denied") {
-              document.getElementById("wrongpwd").innerHTML="Insufficient permissions to write data";
-            } else {
-              document.getElementById("wrongpwd").innerHTML="Error writing data: "+ error;
+    if (etitle.value.length>0 && etitle.value.length>0 && writer.value.length>0){
+      if (etitle.value.length<150 && edesc.value.length<750){
+        if (!duplicates){
+          const docData = {
+              title: String(etitle.value),
+              desc: String(edesc.value),
+              writer: String(writer.value),
+              author: uid,
+              hidden: true
+          };
+          try {
+              await setDoc(doc(db, "posts", String(title.value)), docData);
+              alert("Your post is on pending and a moderator will check it soon!");
+              window.location.href="../home";
+            } catch (error) {
+              if (error.code === "permission-denied") {
+                document.getElementById("wrongpwd").innerHTML="Insufficient permissions to write data";
+              } else {
+                document.getElementById("wrongpwd").innerHTML="Error writing data: "+ error;
+              }
             }
-          }
+        }else{
+          document.getElementById("wrongpwd").innerHTML="A same title is detected, please change your title.";
+        }
       }else{
-        document.getElementById("wrongpwd").innerHTML="A same title is detected, please change your title.";
+        document.getElementById("wrongpwd").innerHTML="Title must be under 150 words and description must be under 750 words.";
+        etitle.value="";
+        edesc.value="";
       }
     }else{
-      document.getElementById("wrongpwd").innerHTML="Title must be under 150 words and description must be under 750 words.";
-      etitle.value="";
-      edesc.value="";
+      document.getElementById("wrongpwd").innerHTML="Please fill in all the blanks.";
     }
 }
 
