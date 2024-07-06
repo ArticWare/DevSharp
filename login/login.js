@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,6 +23,7 @@ const auth = getAuth(app);
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("pwd");
 const loginbut = document.getElementById("loginbutt");
+const provider = new GoogleAuthProvider();
 
 var email, password;
 
@@ -32,8 +33,7 @@ loginbut.addEventListener("click", function() {
   password = passwordInput.value;
 
   signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
+    .then((user) => {
       window.location.replace("../home");
     })
     .catch((error) => {
@@ -41,3 +41,14 @@ loginbut.addEventListener("click", function() {
       document.getElementById('wrongpwd').innerHTML='Incorrect Password or Email, please try again.';
     });
 });
+
+document.getElementById("gglogin").addEventListener("click",function(){
+  signInWithPopup(auth, provider)
+  .then((result) => {
+    const user=result.user
+    window.location.replace("../home");
+  }).catch((error) => {
+    const errorMessage = error.message;
+    document.getElementById('wrongpwd').innerHTML='Error occoured : ' + errorMessage;
+  });  
+})
