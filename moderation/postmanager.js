@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,12 +20,13 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-async function acceptPost(title,desc,writer,author){
+async function acceptPost(title,desc,writer,author,time){
   const data={
     title: title,
     desc: desc,
     author: author,
     writer: writer,
+    date: time,
     hidden: false
   };
   await setDoc(doc(db, "posts", title), data);
@@ -37,7 +38,7 @@ async function deletePost(title){
   location.reload()
 }
 
-function addPost(title, desc, writer, author){
+function addPost(title, desc, writer, author,time){
   if (title.length<=150 && desc.length<=750){
       var posts = document.getElementById("posts");
 
@@ -74,7 +75,7 @@ function addPost(title, desc, writer, author){
       var accepttext=document.createElement("h2");
       accepttext.innerHTML="Accept post";
       accept.appendChild(accepttext);
-      accept.onclick=function(){acceptPost(title,desc,writer,author)};
+      accept.onclick=function(){acceptPost(title,desc,writer,author,time)};
       div.appendChild(accept);
 
       var reject=document.createElement("button");
@@ -103,12 +104,14 @@ onAuthStateChanged(auth,async function(user) {
         var data = doc.data();
         if (data.uid == user.uid){
           isadmin=true;
-          const querySnapshot = await getDocs(collection(db,"posts"));
-          querySnapshot.forEach((doc) => {
-              var data = doc.data();
-              if (data.hidden){
-                addPost(data.title,data.desc,data.writer,data.author);
-              }
+          const q = query(collection(db,"posts"), orderBy("date", "desc"), limit(10));
+          onSnapshot(q, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                var data = doc.data();
+                if (data.hidden){
+                  addPost(data.title,data.desc,data.writer,data.author,data.time);
+                }
+            });
           });
         }
     });

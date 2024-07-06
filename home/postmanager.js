@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-import { getFirestore, collection, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { getFirestore, collection, getDocs, deleteDoc, doc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -66,10 +66,12 @@ function addPost(title, desc, writer,author){
       }
   }
 }
-const thing = await getDocs(collection(db,"posts"));
-thing.forEach((doc) => {
-    var data = doc.data();
-    if (!data.hidden){
-      addPost(data.title,data.desc,data.writer,data.author)
-    }
+const q = query(collection(db,"posts"), orderBy("date"), limit(10));
+onSnapshot(q, (querySnapshot) => {
+  querySnapshot.forEach((doc) => {
+      var data = doc.data();
+      if (!data.hidden){
+        addPost(data.title,data.desc,data.writer,data.author);
+      }
+  });
 });

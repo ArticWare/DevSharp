@@ -41,10 +41,12 @@ async function addpost(){
     if (etitle.value.length>0 && etitle.value.length>0 && writer.value.length>0){
       if (etitle.value.length<150 && edesc.value.length<750){
         if (!duplicates){
+          var time = new Date().getTime();
           const docData = {
               title: String(etitle.value),
               desc: String(edesc.value),
               writer: String(writer.value),
+              date: time,
               author: uid,
               hidden: true
           };
