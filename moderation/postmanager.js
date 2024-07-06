@@ -26,7 +26,7 @@ async function acceptPost(title,desc,writer,author,time){
     desc: desc,
     author: author,
     writer: writer,
-    date: String(time),
+    date: time,
     hidden: false
   };
   await setDoc(doc(db, "posts", title), data);
@@ -109,7 +109,7 @@ onAuthStateChanged(auth,async function(user) {
             querySnapshot.forEach((doc) => {
                 var data = doc.data();
                 if (data.hidden){
-                  addPost(data.title,data.desc,data.writer,data.author,data.time);
+                  addPost(data.title,data.desc,data.writer,data.author,data.date);
                 }
             });
           });

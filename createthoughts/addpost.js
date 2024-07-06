@@ -46,7 +46,7 @@ async function addpost(){
               title: String(etitle.value),
               desc: String(edesc.value),
               writer: String(writer.value),
-              date: String(time),
+              date: time,
               author: uid,
               hidden: true
           };
