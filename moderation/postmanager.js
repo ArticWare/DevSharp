@@ -26,7 +26,7 @@ async function acceptPost(title,desc,writer,author,time){
     desc: desc,
     author: author,
     writer: writer,
-    date: time,
+    date: String(time),
     hidden: false
   };
   await setDoc(doc(db, "posts", title), data);
@@ -38,7 +38,7 @@ async function deletePost(title){
   location.reload()
 }
 
-function addPost(title, desc, writer, author,time){
+function addPost(title, desc, writer, author, time){
   if (title.length<=150 && desc.length<=750){
       var posts = document.getElementById("posts");
 
