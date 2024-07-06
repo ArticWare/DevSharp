@@ -16,6 +16,7 @@ const firebaseConfig = {
   measurementId: "G-D8H3TC9PMP"
 };
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getFirestore(app);
 
 async function acceptPost(title,desc,writer,author){
@@ -88,15 +89,25 @@ function addPost(title, desc, writer, author){
 
       posts.appendChild(document.createElement("p"));
       posts.appendChild(post);
-  }else{
-    console.log('brhu')
   }
 }
 
-const querySnapshot = await getDocs(collection(db,"posts"));
-querySnapshot.forEach((doc) => {
-    var data = doc.data();
-    if (data.hidden){
-      addPost(data.title,data.desc,data.writer,data.author);
-    }
-});
+onAuthStateChanged(auth,async function(user) {
+  if (!user) {
+      window.location.href=notsignedin;
+  }else{
+    const admins = await getDocs(collection(db,"admins"));
+    admins.forEach(async (doc) => {
+        var data = doc.data();
+        if (data.uid == user.uid){
+          const querySnapshot = await getDocs(collection(db,"posts"));
+          querySnapshot.forEach((doc) => {
+              var data = doc.data();
+              if (data.hidden){
+                addPost(data.title,data.desc,data.writer,data.author);
+              }
+          });
+        }
+    });
+  }
+  });
