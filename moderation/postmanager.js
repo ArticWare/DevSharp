@@ -58,6 +58,10 @@ function addPost(title, desc, writer, author){
       authort.className="posttext"
       authort.innerHTML="Author : "+writer;
       post.appendChild(authort);
+      var uidtext=document.createElement("h4");
+      uidtext.className="posttext"
+      uidtext.innerHTML="UID : "+author;
+      post.appendChild(uidtext);      
 
       var div=document.createElement("div");
       div.style.textAlign="center";
