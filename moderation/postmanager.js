@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-import { getFirestore, collection, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,18 +17,23 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const auth = getAuth(app);
-var uid
 
-onAuthStateChanged(auth,async function(user) {
-  if (user){
-    uid=user.uid;
-  }
-});
+async function acceptPost(title,desc,author){
+  const data={
+    title: title,
+    desc: desc,
+    author: author,
+    hidden: false
+  };
+  await setDoc(doc(db, "posts", title), data);
+  location.reload()
+}
+
 async function deletePost(title){
   await deleteDoc(doc(db, "posts", title));
   location.reload()
 }
+
 function addPost(title, desc, author){
   if (title.length<=150 && desc.length<=750){
       var posts = document.getElementById("posts");
@@ -44,30 +48,46 @@ function addPost(title, desc, author){
       titletext.className="titleposttext";
       titletext.innerHTML=title;
       titlepost.appendChild(titletext);
-      
+
       let desctext = document.createElement("h2");
       desctext.className="posttext";
       desctext.innerHTML=desc;
       post.appendChild(desctext);
-      
+
+      var div=document.createElement("div");
+      div.style.textAlign="center";
+
+      var accept=document.createElement("button");
+      accept.className="button2";
+      accept.style.backgroundColor='lime';
+      var accepttext=document.createElement("h2");
+      accepttext.innerHTML="Accept post";
+      accept.appendChild(accepttext);
+      accept.onclick=function(){acceptPost(title,desc,author)};
+      div.appendChild(accept);
+
+      var reject=document.createElement("button");
+      reject.className="button2";
+      var rejecttext=document.createElement("h2");
+      rejecttext.innerHTML="Reject post";
+      reject.style.backgroundColor='red';
+      reject.onclick=function(){deletePost(title)}
+      reject.appendChild(rejecttext);
+      div.appendChild(reject);
+
+      post.appendChild(div);
+
       posts.appendChild(document.createElement("p"));
       posts.appendChild(post);
-      var delpost=document.createElement("button");
-      delpost.className="button4";
-      var rejecttext=document.createElement("h4");
-      rejecttext.innerHTML="Delete";
-      delpost.onclick=function(){deletePost(title)}
-      delpost.appendChild(rejecttext);
-      if (author==uid){
-        posts.append(delpost);
-      }
+  }else{
+    console.log('brhu')
   }
 }
 
-const thing = await getDocs(collection(db,"posts"));
-thing.forEach((doc) => {
+const querySnapshot = await getDocs(collection(db,"posts"));
+querySnapshot.forEach((doc) => {
     var data = doc.data();
-    if (!data.hidden){
-      addPost(data.title,data.desc,data.author)
+    if (data.hidden){
+      addPost(data.title,data.desc,data.author);
     }
 });

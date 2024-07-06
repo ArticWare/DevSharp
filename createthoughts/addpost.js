@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-import { getFirestore, doc, setDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { getFirestore, doc, setDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -29,24 +29,35 @@ async function addpost(){
     document.getElementById("wrongpwd").innerHTML="";
     var etitle = document.getElementById("title");
     var edesc = document.getElementById("desc");
-    if (etitle.value.length<150 && edesc.value.length<750){
-      const docData = {
-          title: String(etitle.value),
-          desc: String(edesc.value),
-          author: uid
-      };
-      document.getElementById("wrongpwd").style.color='red';
-      try {
-          await setDoc(doc(db, "posts", String(title.value)), docData);
-          document.getElementById("wrongpwd").style.color='green';
-          document.getElementById("wrongpwd").innerHTML="Post created successfully!";
-        } catch (error) {
-          if (error.code === "permission-denied") {
-            document.getElementById("wrongpwd").innerHTML="Insufficient permissions to write data";
-          } else {
-            document.getElementById("wrongpwd").innerHTML="Error writing data: "+ error;
-          }
+    var duplicates=false;
+    const querySnapshot = await getDocs(collection(db,"posts"));
+    querySnapshot.forEach((doc) => {
+        if (doc.id==etitle.value){
+          duplicates=true;
         }
+    });
+    if (etitle.value.length<150 && edesc.value.length<750){
+      if (!duplicates){
+        const docData = {
+            title: String(etitle.value),
+            desc: String(edesc.value),
+            author: uid,
+            hidden: true
+        };
+        try {
+            await setDoc(doc(db, "posts", String(title.value)), docData);
+            alert("Your post is on pending and a moderator will check it soon!");
+            window.location.href="../home";
+          } catch (error) {
+            if (error.code === "permission-denied") {
+              document.getElementById("wrongpwd").innerHTML="Insufficient permissions to write data";
+            } else {
+              document.getElementById("wrongpwd").innerHTML="Error writing data: "+ error;
+            }
+          }
+      }else{
+        document.getElementById("wrongpwd").innerHTML="A same title is detected, please change your title.";
+      }
     }else{
       document.getElementById("wrongpwd").innerHTML="Title must be under 150 words and description must be under 750 words.";
       etitle.value="";

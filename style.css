@@ -76,6 +76,28 @@ header {
     border-radius: 50px;
 }
 
+.navitems1 {
+    padding-right: 10px;
+    padding-left: 10px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    margin-left: auto;
+    width: fit-content;
+    height: fit-content;
+    font-size: 1vw;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.navitems1:hover {
+    padding-right: 50px;
+    padding-left: 50px;
+    color: #444;
+    background-color: white;
+    border-radius: 50px;
+}
+
 .logotext {
     color: white;
     padding-right: 50px;
@@ -142,13 +164,13 @@ header {
     height: fit-content;
     padding-bottom: 5%;
     text-align: left;
-    cursor: pointer;
     word-wrap: break-word;
 
 }
 
 .titleposttext {
     padding-left: 5%;
+    padding-right: 2%;
 }
 
 .posttext {
@@ -156,7 +178,9 @@ header {
     padding-right: 2%;
     color: #5b5a5a;
 }
+.deletepost {
 
+}
 .titlepost {
     margin: auto;
     height: fit-content;
@@ -164,4 +188,21 @@ header {
     padding: 10px;
     width: 95%;
     word-wrap: break-word;
+}
+
+.button4 {
+    transition: .5s;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 1vw;
+}
+
+.button4:hover {
+    background-color: white;
+    color: red;
 }
