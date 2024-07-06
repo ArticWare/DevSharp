@@ -98,9 +98,11 @@ onAuthStateChanged(auth,async function(user) {
       window.location.href=notsignedin;
   }else{
     const admins = await getDocs(collection(db,"admins"));
+    var isadmin=false;
     admins.forEach(async (doc) => {
         var data = doc.data();
         if (data.uid == user.uid){
+          isadmin=true;
           const querySnapshot = await getDocs(collection(db,"posts"));
           querySnapshot.forEach((doc) => {
               var data = doc.data();
@@ -110,5 +112,8 @@ onAuthStateChanged(auth,async function(user) {
           });
         }
     });
+    if (!isadmin){
+      window.location.href="../home";
+    }
   }
   });
