@@ -69,8 +69,6 @@ async function addpost(){
         }
       }else{
         document.getElementById("wrongpwd").innerHTML="Title must be under 150 words and description must be under 750 words.";
-        etitle.value="";
-        edesc.value="";
       }
     }else{
       document.getElementById("wrongpwd").innerHTML="Please fill in all the blanks.";
