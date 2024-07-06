@@ -26,6 +26,7 @@ onAuthStateChanged(auth,function(user) {
   uid=user.uid;
 });
 async function addpost(){
+    auth.currentUser.getIdToken(true);
     document.getElementById("wrongpwd").innerHTML="";
     var etitle = document.getElementById("title");
     var edesc = document.getElementById("desc");
@@ -53,7 +54,12 @@ async function addpost(){
               window.location.href="../home";
             } catch (error) {
               if (error.code === "permission-denied") {
-                document.getElementById("wrongpwd").innerHTML="Insufficient permissions to write data";
+                if (!auth.currentUser.emailVerified){
+                  alert("Your email is not verified yet, redirect you to verify page.");
+                  location.href='../verifyemail';
+                }else{
+                  document.getElementById("wrongpwd").innerHTML="Insufficient permissions to write data";
+                }
               } else {
                 document.getElementById("wrongpwd").innerHTML="Error writing data: "+ error;
               }

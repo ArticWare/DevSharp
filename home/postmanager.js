@@ -19,8 +19,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
-var uid
-
+var uid;
 onAuthStateChanged(auth,async function(user) {
   if (user){
     uid=user.uid;
@@ -67,7 +66,6 @@ function addPost(title, desc, writer,author){
       }
   }
 }
-
 const thing = await getDocs(collection(db,"posts"));
 thing.forEach((doc) => {
     var data = doc.data();

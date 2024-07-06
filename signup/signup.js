@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+import { getAuth, sendEmailVerification, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -41,11 +41,13 @@ signupbut.addEventListener("click", function() {
   }
   if(isVerified) {
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-      const user = userCredential.user;
-      window.location.replace('../login')
+      .then(async (user) => {
+      if (user!=null){
+        window.location.href="../login"
+      }
     })
     .catch((error) => {
+      console.log(error)
       switch (error.code) {
         case 'auth/email-already-in-use':
           document.getElementById('wrongpwd').innerHTML='Email already in use.';
@@ -62,7 +64,7 @@ signupbut.addEventListener("click", function() {
         default:
           document.getElementById('wrongpwd').innerHTML='Error occurred.';
           break;
-      }      
+      }
     });
   }    
 });
