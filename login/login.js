@@ -53,12 +53,3 @@ document.getElementById("gglogin").addEventListener("click",function(){
     document.getElementById('wrongpwd').innerHTML='Error occoured : ' + errorMessage;
   });  
 })
-// check Capslock
-  const Warning = document.getElementById('warning')
-      passwordInput.addEventListener('keyup', (event) =>{
-        if(event.getModifierState('CapsLock')) {
-         Warning.hidden = false;
-        } else {
-          Warning.hidden = true;
-        }
-      }) 

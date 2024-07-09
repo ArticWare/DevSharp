@@ -9,6 +9,7 @@
 <body>
     <script src="signup.js" type="module"></script>
     <script src="ifsignedin.js" type="module"></script>
+    <script src="capsdetect.js"></script>
     <header>
         <h1 class="logotext">devsharp</h1>
         <a href="../home" class="navitems"><h1>Home</h1></a>
@@ -28,6 +29,7 @@
                 <h2><input type="email" class="text1" placeholder="Email" id="email"></h2>
                 <h2><input type="password" class="text1" placeholder="Password" id="pwd"></h2>
                 <h2><input type="password" class="text1" placeholder="Re-enter Password" id="repwd"></h2>
+                <h3 id="warning" hidden style="color: rgb(125, 133, 58);">Warning : Caps lock on</h3>
             </div>
         </div>
         <p style="color: red;" id="wrongpwd"></p>
