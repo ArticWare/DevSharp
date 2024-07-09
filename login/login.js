@@ -39,6 +39,7 @@ loginbut.addEventListener("click", function() {
     .catch((error) => {
       console.log(error.message);
       document.getElementById('wrongpwd').innerHTML='Incorrect Password or Email, please try again.';
+      
     });
 });
 
@@ -52,3 +53,12 @@ document.getElementById("gglogin").addEventListener("click",function(){
     document.getElementById('wrongpwd').innerHTML='Error occoured : ' + errorMessage;
   });  
 })
+// check Capslock
+  const Warning = document.getElementById('warning')
+      passwordInput.addEventListener('keyup', (event) =>{
+        if(event.getModifierState('CapsLock')) {
+         Warning.hidden = false;
+        } else {
+          Warning.hidden = true;
+        }
+      }) 
