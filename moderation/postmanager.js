@@ -104,7 +104,7 @@ onAuthStateChanged(auth,async function(user) {
         var data = doc.data();
         if (data.uid == user.uid){
           isadmin=true;
-          const q = query(collection(db,"posts"), orderBy("date"), limit(10));
+          const q = query(collection(db,"posts"), orderBy("date","desc"), limit(10));
           onSnapshot(q, (querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 var data = doc.data();
