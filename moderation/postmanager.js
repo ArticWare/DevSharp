@@ -20,8 +20,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-async function acceptPost(title){
-  await setDoc(doc(db, "verifiedposts", title), {});
+async function acceptPost(title,uid){
+  await setDoc(doc(db, "verifiedposts", title), {uid: uid});
   location.reload()
 }
 
@@ -62,19 +62,17 @@ function addPost(title, desc, writer, author, time){
       div.style.textAlign="center";
 
       var accept=document.createElement("button");
-      accept.className="button2";
-      accept.style.backgroundColor='lime';
+      accept.className="button7";
       var accepttext=document.createElement("h2");
       accepttext.innerHTML="Accept post";
       accept.appendChild(accepttext);
-      accept.onclick=function(){acceptPost(title,desc,writer,author,time)};
+      accept.onclick=function(){acceptPost(title,author)};
       div.appendChild(accept);
 
       var reject=document.createElement("button");
-      reject.className="button2";
+      reject.className="button4";
       var rejecttext=document.createElement("h2");
       rejecttext.innerHTML="Reject post";
-      reject.style.backgroundColor='red';
       reject.onclick=function(){deletePost(title)}
       reject.appendChild(rejecttext);
       div.appendChild(reject);

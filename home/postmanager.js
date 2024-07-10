@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-import { getFirestore, collection, getDoc, deleteDoc, doc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { getFirestore, collection, getDoc, getDocs, deleteDoc, doc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,16 +20,30 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 var uid;
+var isadmin=false;
 onAuthStateChanged(auth,async function(user) {
   if (user){
     uid=user.uid;
+    const admins = await getDocs(collection(db,"admins"));
+    admins.forEach(async (doc) => {
+      if (doc.id==uid){
+        isadmin=true;
+      }
+    });
   }
 });
+
 async function deletePost(title){
-  await deleteDoc(doc(db, "posts", title));
-  location.reload()
+  try{
+    await deleteDoc(doc(db, "posts", title));
+    await deleteDoc(doc(db, "verifiedposts", title));
+  }catch (error){
+    console.error(error)
+  }
+  location.reload();
 }
-function addPost(title, desc, writer,author){
+
+async function addPost(title, desc, writer,author){
   if (title.length<=150 && desc.length<=750){
       var posts = document.getElementById("posts");
 
@@ -61,7 +75,7 @@ function addPost(title, desc, writer,author){
       rejecttext.innerHTML="Delete";
       delpost.onclick=function(){deletePost(title)}
       delpost.appendChild(rejecttext);
-      if (author==uid){
+      if (author==uid || isadmin){
         posts.append(delpost);
       }
   }
@@ -88,9 +102,10 @@ const checkDocumentExists = async (collectionName, documentId) => {
 const q = query(collection(db,"posts"), orderBy("date","desc"), limit(10));
 onSnapshot(q, (querySnapshot) => {
   querySnapshot.forEach(async (doc) => {
-      var data = doc.data();
       if (await checkDocumentExists('verifiedposts',doc.id)==true){
+        var data = doc.data();
         addPost(data.title,data.desc,data.writer,data.author);
       }
   });
+  document.getElementById("loadpost").remove();
 });

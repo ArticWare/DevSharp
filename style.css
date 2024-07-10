@@ -199,19 +199,20 @@ header {
 
 .button4 {
     transition: .5s;
-    background-color: red;
+    background-color: #953737;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
     font-size: 1vw;
+    margin: 0 10px;
 }
 
 .button4:hover {
     background-color: white;
-    color: red;
+    color: #953737;
 }
 
 .button5 {
@@ -257,4 +258,22 @@ header {
 
 .nodecoration {
     text-decoration: none;
+}
+
+.button7 {
+    transition: .5s;
+    background-color: #06925e;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding-left: 50px;
+    padding-right: 50px;
+    font-size: 1vw;
+    margin: 0 10px;
+}
+
+.button7:hover {
+    background-color: white;
+    color: #06925e; 
 }
