@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { getFirestore, collection, getDocs, getDoc, setDoc, doc, deleteDoc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,16 +20,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-async function acceptPost(title,desc,writer,author,time){
-  const data={
-    title: title,
-    desc: desc,
-    author: author,
-    writer: writer,
-    date: time,
-    hidden: false
-  };
-  await setDoc(doc(db, "posts", title), data);
+async function acceptPost(title){
+  await setDoc(doc(db, "verifiedposts", title), {});
   location.reload()
 }
 
@@ -93,22 +85,39 @@ function addPost(title, desc, writer, author, time){
       posts.appendChild(post);
   }
 }
+const checkDocumentExists = async (collectionName, documentId) => {
+  try {
+    // Reference to the document
+    const docRef = doc(db, collectionName, documentId);
 
+    // Get the document
+    const docSnap = await getDoc(docRef);
+
+    // Check if the document exists
+    if (docSnap.exists()) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("Error checking document existence:", error);
+    throw error;
+  }
+};
 onAuthStateChanged(auth,async function(user) {
   if (!user) {
-      window.location.href=notsignedin;
+    window.location.href=notsignedin;
   }else{
     const admins = await getDocs(collection(db,"admins"));
     var isadmin=false;
     admins.forEach(async (doc) => {
-        var data = doc.data();
-        if (data.uid == user.uid){
+        if (doc.id==user.uid){
           isadmin=true;
           const q = query(collection(db,"posts"), orderBy("date","desc"), limit(10));
           onSnapshot(q, (querySnapshot) => {
-            querySnapshot.forEach((doc) => {
+            querySnapshot.forEach(async (doc) => {
                 var data = doc.data();
-                if (data.hidden){
+                if (await checkDocumentExists('verifiedposts',doc.id)==false){
                   addPost(data.title,data.desc,data.writer,data.author,data.date);
                 }
             });

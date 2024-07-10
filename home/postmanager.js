@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-import { getFirestore, collection, getDocs, deleteDoc, doc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { getFirestore, collection, getDoc, deleteDoc, doc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -66,11 +66,30 @@ function addPost(title, desc, writer,author){
       }
   }
 }
+const checkDocumentExists = async (collectionName, documentId) => {
+  try {
+    // Reference to the document
+    const docRef = doc(db, collectionName, documentId);
+
+    // Get the document
+    const docSnap = await getDoc(docRef);
+
+    // Check if the document exists
+    if (docSnap.exists()) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("Error checking document existence:", error);
+    throw error;
+  }
+};
 const q = query(collection(db,"posts"), orderBy("date","desc"), limit(10));
 onSnapshot(q, (querySnapshot) => {
-  querySnapshot.forEach((doc) => {
+  querySnapshot.forEach(async (doc) => {
       var data = doc.data();
-      if (!data.hidden){
+      if (await checkDocumentExists('verifiedposts',doc.id)==true){
         addPost(data.title,data.desc,data.writer,data.author);
       }
   });

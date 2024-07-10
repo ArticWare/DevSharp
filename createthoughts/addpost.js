@@ -47,8 +47,7 @@ async function addpost(){
               desc: String(edesc.value),
               writer: String(writer.value),
               date: time,
-              author: uid,
-              hidden: true
+              author: uid
           };
           try {
               await setDoc(doc(db, "posts", String(title.value)), docData);

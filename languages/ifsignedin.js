@@ -1,4 +1,4 @@
-const notsignedin = '../getstarted';
+const notsignedin = '/getstarted';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
@@ -25,7 +25,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 document.getElementById("logout").addEventListener("click",function(){signOut(auth).then(function() {
-  window.location.href="../getstarted";
+  window.location.href="/getstarted";
 }).catch(function(error) {
   console.error("Error occoured");
 });});

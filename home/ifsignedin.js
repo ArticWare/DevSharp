@@ -37,8 +37,7 @@ if (!user) {
   if (user.emailVerified){
     const querySnapshot = await getDocs(collection(db,"admins"));
     querySnapshot.forEach((doc) => {
-        var data = doc.data();
-        if (data.uid==user.uid){
+        if (doc.id==user.uid){
           var moderation = document.createElement("a");
           moderation.href="../moderation";
           moderation.className="navitems";
