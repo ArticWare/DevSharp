@@ -57,8 +57,8 @@ async function addpost(){
             } catch (error) {
               if (error.code === "permission-denied") {
                 if (!auth.currentUser.emailVerified){
-                  alert("Your email is not verified yet, redirect you to verify page.");
-                  location.href='../verifyemail';
+                  alert("Your Email need to be verified!");
+                  open('../verifyemail');
                 }else{
                   document.getElementById("wrongpwd").innerHTML="Insufficient permissions to write data";
                 }
