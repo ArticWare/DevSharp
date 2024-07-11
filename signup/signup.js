@@ -24,6 +24,7 @@ const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("pwd");
 const repasswordInput = document.getElementById("repwd");
 const signupbut = document.getElementById("signupbut");
+const provider = new GoogleAuthProvider();
 
 var email, password;
 
