@@ -50,7 +50,7 @@ async function addpost(){
           try {
               await setDoc(doc(db, "cpp_posts", String(etitle.value)), docData);
               alert("Your post is sent to public! Anyone with the ID can access it!");
-              window.location.href="../cpp";
+              window.location.href="../";
             } catch (error) {
               if (error.code === "permission-denied") {
                 if (!auth.currentUser.emailVerified){

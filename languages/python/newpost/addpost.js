@@ -50,7 +50,7 @@ async function addpost(){
           try {
               await setDoc(doc(db, "py_posts", String(etitle.value)), docData);
               alert("Your post is sent to public! Anyone with the ID can access it!");
-              window.location.href="../python";
+              window.location.href="../";
             } catch (error) {
               if (error.code === "permission-denied") {
                 if (!auth.currentUser.emailVerified){
