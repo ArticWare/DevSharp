@@ -27,7 +27,7 @@ document.getElementById("openpost").addEventListener("click", async () => {
     const docSnap = await getDoc(doc_ref);
     if (docSnap.exists) {
       const doc = docSnap.data();
-      document.getElementById("main").innerHTML = doc.content;
+      document.getElementById("main").innerHTML = doc.content.replace(/(https?:\/\/\S+)/g, '<a href="$1" target="_blank">$1</a>');
     } else {
       console.log("Document not found!");
     }
