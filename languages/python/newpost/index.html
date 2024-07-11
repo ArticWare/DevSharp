@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>DevSharp</title>
+    <meta content="DevSharp | Share your thoughts!" property="og:title" />
+    <meta content="Learn programming for completely free with the help of a growing community!" property="og:description" />
+    <meta content="https://devsharp.org" property="og:url" />
+    <meta content="https://devsharp.org/logo.png" property="og:image"/>
+    <meta content="#43B581" data-react-helmet="true" name="theme-color"/>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3973454891176868"
+    crossorigin="anonymous"></script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-3973454891176868?ers=1" nonce="64PxUe_l-oyRAIDv9u2cqw"></script><script nonce="64PxUe_l-oyRAIDv9u2cqw">(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+</head>
+<body>
+    <script type="module" src="ifsignedin.js"></script>
+    <script type="module" src="addpost.js"></script>
+    <script src="capsdetect.js"></script>
+    <script src="tools.js"></script>
+
+    <header>
+        <h1 class="logotext">devsharp</h1>
+        <a href="/home" class="navitems"><h1>Home</h1></a>
+        <a href="/about" class="navitems"><h1>About</h1></a>
+        <a href="/donate" class="navitems"><h1>Donate</h1></a>
+        <a href="/privacynpolicy" class="navitems"><h1>Privacy & Policy</h1></a>
+    </header>
+    <p></p>
+    <main class="main0">
+        <h3 id="warning" style="color: rgb(125, 133, 58);">Warning : No drafts will be saved, considering writing on Microsoft Word then paste all to this box.</h3>
+        <div style="display: flex; width: fit-content; margin: auto;">
+            <div style="width: fit-content; text-align: right;">
+                <h2>Post ID</h2>
+                <h2>Content</h2>
+            </div>
+            <h1 style="padding: 10px;"></h1>
+            <div style="width: fit-content; text-align: left;">
+                <h2><input type="text" class="text1" id="title" style="width: 50vw;"></h2>
+                <div>
+                    <div id="tools" style="width: 100%; background-color: #333; padding-top: 1%; padding-bottom: 1%;">
+                        <button class="button8" onclick="addh1()">Add h1</button>
+                        <button class="button8" onclick="addh2()">Add h2</button>
+                        <button class="button8" onclick="addh3()">Add h3</button>
+                        <button class="button8" onclick="addh4()">Add h4</button>
+                        <button class="button8" onclick="addh5()">Add h5</button>
+                        <button class="button8" onclick="addp()">Add paragraph</button>
+                        <p></p>
+                        <button class="button8" onclick="addul()">Add list</button>
+                        <button class="button8" onclick="addvid()">Add Youtube video</button>
+                        <button class="button8" onclick="addimg()">Add image</button>
+                        <button class="button8" onclick="addbold()">Add bold</button>
+                        <button class="button8" onclick="addita()">Add italic</button>
+                    </div>
+                    <section contenteditable="true" id="textcuzwhynot" class="text1" id="desc" style="height: 200vh; width: 80vw;">
+                        <h1>Example post</h1>
+                        <h1>Welcome to Python!</h1>
+                        <h2>Things you will need to start programming on Python :</h2>
+                        <ul>
+                            <li><h3>Python 3.9+</h3></li>
+                        </ul>
+                    </section>
+                </div>
+                <p style="padding: 10px;"></p>
+                <h2>Author</h2>
+                <h2><input type="text" class="text1" id="writer" style="width: 30vw;"></h2>
+                </div>
+            </div>
+        <button class="button1" id="submit"><h2>Create thoughts</h2></button>
+        <p style="color: red;" id="wrongpwd"></p>
+    </main>
+</body>
+</html>

@@ -29,7 +29,7 @@ async function addpost(){
     auth.currentUser.getIdToken(true);
     document.getElementById("wrongpwd").innerHTML="";
     var etitle = document.getElementById("title");
-    var edesc = document.getElementById("desc");
+    var edesc = document.getElementById("textcuzwhynot");
     var writer = document.getElementById("writer");
     var duplicates=false;
     const querySnapshot = await getDocs(collection(db,"posts"));
@@ -39,20 +39,18 @@ async function addpost(){
         }
     });
     if (etitle.value.length>0 && etitle.value.length>0 && writer.value.length>0){
-      if (etitle.value.length<150 && edesc.value.length<750){
+      if (true){
         if (!duplicates){
           var time = new Date().getTime();
           const docData = {
-              title: String(etitle.value),
-              desc: String(edesc.value),
+              content: edesc.innerHTML,
               writer: String(writer.value),
-              date: time,
               author: uid
           };
           try {
-              await setDoc(doc(db, "posts", String(etitle.value)), docData);
+              await setDoc(doc(db, "py_posts", String(etitle.value)), docData);
               alert("Your post is on pending and a moderator will check it soon!");
-              window.location.href="../home";
+              window.location.href="../python";
             } catch (error) {
               if (error.code === "permission-denied") {
                 if (!auth.currentUser.emailVerified){
@@ -66,10 +64,8 @@ async function addpost(){
               }
             }
         }else{
-          document.getElementById("wrongpwd").innerHTML="A same title is detected, please change your title.";
+          document.getElementById("wrongpwd").innerHTML="A same ID is detected, please change your ID.";
         }
-      }else{
-        document.getElementById("wrongpwd").innerHTML="Title must be under 150 words and description must be under 750 words.";
       }
     }else{
       document.getElementById("wrongpwd").innerHTML="Please fill in all the blanks.";
