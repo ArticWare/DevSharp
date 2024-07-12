@@ -1,4 +1,4 @@
-var button = document.getElementsByName('button2')
-function Notfound() {
-    window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+var button = document.getElementsByClassName('button2');
+function Notfound(button) {
+    window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
 }
