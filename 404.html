@@ -8,17 +8,8 @@
     <script src="MobileUser/detect.js"></script>
     <title>DevSharp</title>
 </head>
-
 <body>
-    <script>
-        function thing(){
-            if ('ontouchstart' in window || navigator.maxTouchPoints){
-                window.location.replace("https://bom.so/Q0eN4D");
-            }else{
-                window.history.back();
-            }
-        }
-    </script>
+    <script src="MobileUser/detect.js"></script>
     <header>
         <h1 class="logotext">devsharp</h1>
         <a href="../home" class="navitems">
@@ -34,7 +25,7 @@
     <p></p>
     <main class="main0">
         <h1>We haven't finish this page yet.</h1>
-        <button class="button2" onclick="thing()"><h1>Go Back</h1></button>
+        <button class="button2" onclick="window.history.back()"><h1>Go Back</h1></button>
     </main>
 </body>
 
