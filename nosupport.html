@@ -9,18 +9,19 @@
 </head>
 
 <body>
-    <script>
-        function thing(){
-            window.history.back();
-            window.history.back();
-        }
-    </script>
     <main class="main0">
         <h1>We don't support phone for our website.</h1>
         <h1>For you because you thought you can program on phones.</h1>
-        <video width="50%" autoplay muted>
+        <video width="50%" autoplay id="stuff">
             <source src="/MobileUser/idk.mp4" type="video/mp4">
         </video>
+        <script>
+            document.getElementById("stuff").play();
+            function thing(){
+                window.history.back();
+                window.history.back();
+            }
+        </script>
         <p></p>
         <button class="button2" onclick="thing()"><h1>Go Back</h1></button>
     </main>
