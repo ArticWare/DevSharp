@@ -32,7 +32,7 @@ async function addpost(){
     var edesc = document.getElementById("textcuzwhynot");
     var writer = document.getElementById("writer");
     var duplicates=false;
-    const querySnapshot = await getDocs(collection(db,"posts"));
+    const querySnapshot = await getDocs(collection(db,"cpp_posts"));
     querySnapshot.forEach((doc) => {
         if (doc.id==etitle.value){
           duplicates=true;

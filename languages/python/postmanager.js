@@ -20,9 +20,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-document.getElementById("openpost").addEventListener("click", async () => {
-  const doc_id = document.getElementById("postid").value;
-  const doc_ref = doc(db, "py_posts", doc_id);
+async function openPost(doc_id){
+  const doc_ref = doc(db, "v_py_posts", doc_id);
   try {
     const docSnap = await getDoc(doc_ref);
     if (docSnap.exists) {
@@ -33,5 +32,20 @@ document.getElementById("openpost").addEventListener("click", async () => {
     }
   } catch (error) {
     console.error("Error getting document:", error);
-  }
+  }  
+}
+function addPost(id){
+  var btn=document.createElement("button");
+  btn.className="button3";
+  btn.onclick=function(){openPost(id)};
+  btn.innerHTML="<h2>"+id+"</h2>"
+  var main=document.getElementById("recentposts");
+  main.appendChild(btn);
+  main.appendChild(document.createElement("p"));
+}
+const q = query(collection(db,"v_py_posts"), limit(3));
+onSnapshot(q, (querySnapshot) => {
+  querySnapshot.forEach(async (doc) => {
+      addPost(doc.id);
+  });
 });

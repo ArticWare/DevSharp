@@ -21,12 +21,12 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 async function openPost(doc_id){
-  const doc_ref = doc(db, "v_cpp_posts", doc_id);
+  const doc_ref = doc(db, "v_py_posts", doc_id);
   try {
     const docSnap = await getDoc(doc_ref);
     if (docSnap.exists) {
       const doc = docSnap.data();
-      document.getElementById("main").innerHTML = doc.content;
+      document.getElementById("posts").innerHTML = doc.content;
     } else {
       console.log("Document not found!");
     }
@@ -39,11 +39,11 @@ function addPost(id){
   btn.className="button3";
   btn.onclick=function(){openPost(id)};
   btn.innerHTML="<h2>"+id+"</h2>"
-  var main=document.getElementById("recentposts");
+  var main=document.getElementById("posts");
   main.appendChild(btn);
   main.appendChild(document.createElement("p"));
 }
-const q = query(collection(db,"v_cpp_posts"), limit(3));
+const q = query(collection(db,"v_py_posts"));
 onSnapshot(q, (querySnapshot) => {
   querySnapshot.forEach(async (doc) => {
       addPost(doc.id);

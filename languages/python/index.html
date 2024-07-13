@@ -13,6 +13,7 @@
 <body>
     <script src="/MobileUser/detect.js"></script>
     <script type="module" src="postmanager.js"></script>
+    <script type="module" src="ifsignedin.js"></script>
     <header id="header">
         <h1 class="logotext">devsharp.org</h1>
         <a href="/home" class="navitems"><h1>Home</h1></a>
@@ -22,11 +23,13 @@
     </header>
     <p></p>
     <div class="main2">
-        <input type="text" class="text2" id="postid">
-        <p></p>
-        <button class="button1" id="openpost"><h3>Open Post</h3></button>
         <a href="newpost"><button class="button1" id="openpost"><h3>Create New Post</h3></button></a>
     </div>
+    <p></p>
+    <main class="main1"><h1>Most Recent Posts</h1>
+        <div id="recentposts"></div>
+        <a href="allpost"><button class="button2"><h2>See all posts</h2></button></a>
+    </main>
     <p></p>
     <main class="main2" id="main">
         <h1>Welcome to Python!</h1>
