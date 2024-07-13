@@ -70,7 +70,7 @@ async function openPost(doc_id,content,author,writer){
 
 onAuthStateChanged(auth,async function(user) {
   if (!user) {
-    window.location.href=notsignedin;
+    window.location.href="/getstarted";
   }else{
     const admins = await getDocs(collection(db,"admins"));
     var isadmin=false;
