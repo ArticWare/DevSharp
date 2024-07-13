@@ -1,3 +1,3 @@
-if('ontouchstart' in window || navigator.maxTouchPoints) {
+if (navigator.userAgent.toLocaleLowerCase().match(/mobile/i)) {
     window.location.replace("/nosupport")
 }
