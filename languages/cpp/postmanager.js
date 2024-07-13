@@ -27,6 +27,7 @@ async function openPost(doc_id){
     if (docSnap.exists) {
       const doc = docSnap.data();
       document.getElementById("main").innerHTML = doc.content;
+      window.location.href="#main"
     } else {
       console.log("Document not found!");
     }
