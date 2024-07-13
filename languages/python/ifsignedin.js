@@ -27,5 +27,20 @@ const db = getFirestore(app);
 onAuthStateChanged(auth,async function(user) {
 if (!user) {
     window.location.href=notsignedin;
+}else{
+  if (user.emailVerified){
+    const querySnapshot = await getDocs(collection(db,"admins"));
+    querySnapshot.forEach((doc) => {
+        if (doc.id==user.uid){
+          var moderation = document.createElement("a");
+          moderation.href="moderation";
+          moderation.className="navitems";
+          var mh1 = document.createElement("h1");
+          mh1.innerHTML="Moderation";
+          moderation.appendChild(mh1)
+          document.getElementById("header").appendChild(moderation);
+        }
+    });
+  }
 }
 });

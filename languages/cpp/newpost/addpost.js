@@ -32,7 +32,7 @@ async function addpost(){
     var edesc = document.getElementById("textcuzwhynot");
     var writer = document.getElementById("writer");
     var duplicates=false;
-    const querySnapshot = await getDocs(collection(db,"posts"));
+    const querySnapshot = await getDocs(collection(db,"cpp_posts"));
     querySnapshot.forEach((doc) => {
         if (doc.id==etitle.value){
           duplicates=true;
@@ -49,7 +49,7 @@ async function addpost(){
           };
           try {
               await setDoc(doc(db, "cpp_posts", String(etitle.value)), docData);
-              alert("Your post is sent to public! Anyone with the ID can access it!");
+              alert("Your post is on pending and a moderator will check it soon!");
               window.location.href="../";
             } catch (error) {
               if (error.code === "permission-denied") {
