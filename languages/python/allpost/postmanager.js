@@ -26,7 +26,9 @@ async function openPost(doc_id){
     const docSnap = await getDoc(doc_ref);
     if (docSnap.exists) {
       const doc = docSnap.data();
-      document.getElementById("posts").innerHTML = doc.content;
+      const posts=document.getElementById("posts")
+      posts.className = "main2";
+      posts.innerHTML = doc.content;
     } else {
       console.log("Document not found!");
     }
